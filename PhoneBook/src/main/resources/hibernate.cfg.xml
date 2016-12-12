@@ -6,14 +6,16 @@
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost/test</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/sys</property>
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.connection.password">admin</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <property name="hibernate.default_schema">Person</property>
+  
   <property name="hibernate.current_session_context_class">thread</property>
-  <property name="hbm2ddl.auto=create"> </property>
+  <property name="hbm2ddl.auto">create</property>
   <property name="show_sql">true</property>
-  <mapping class="entities.Person" />
+  <property name="connection.pool_size">1</property>
+  <mapping class="main.java.entities.Contact" />
+  <mapping class="main.java.entities.Other" />
 </session-factory>
 </hibernate-configuration>

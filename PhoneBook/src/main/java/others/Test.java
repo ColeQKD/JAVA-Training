@@ -1,47 +1,64 @@
-package main.java.entities;
+package main.java.others;
 
-import java.util.Scanner;
+import java.io.Serializable;
+import java.util.Date;
 
+//import java.util.Date;
+
+import org.hibernate.Session;
+
+import main.java.entities.Contact;
+import main.java.entities.Other;
+import main.persistence.HibernateUtil;
 
 public class Test {
+	public static void main(String[] args) {
+		System.out.println("Maven + Hibernate + MySQL");
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-    public static void main(String[] args) {
+		Contact contact1 = new Contact();
+		Contact contact2 = new Contact();
+		Other other1 = new Other();
+		Other other2 = new Other();
 
-        Agenda testAgenda = new Agenda();
+		other1.setVersion(1);
+		other1.setdateCreated(new Date());
+		other1.setDescription("test1");
 
-//        Person testPerson = new Person("18401", "Lucian", "Plopeanu", 26, "a@a.com", "0742544712");
-//        testAgenda.add(testPerson);
-//        testAgenda.deletePerson(testPerson);
+		other2.setVersion(2);
+		other2.setdateCreated(new Date());
+		other2.setDescription("test2");
 
-        testAgenda.add(new Person("18403", "Lucian7", "Plopeanu4", 32, "a@a.com", "0742544715"));
-        testAgenda.add(new Person("18404", "Lucian4", "Plopeanu5", 21, "a@a.com", "0742544716"));
-        testAgenda.add(new Person("18405", "Lucian5", "Plopeanu6", 88, "a@a.com", "0742544717"));
-        testAgenda.add(new Person("18406", "Lucian6", "Plopeanu7", 46, "a@a.com", "0742544718"));
-        testAgenda.add(new Person("18407", "Lucian3", "Plopeanu8", 55, "a@a.com", "0742544710"));
-        testAgenda.add(new Person("18408", "Lucian8", "Plopeanu1", 13, "a@a.com", "0742544719"));
-        testAgenda.add(new Person("18409", "Lucian0", "Plopeanu4", 26, "a@a.com", "0742544712"));
+		contact1.setdateCreated(new Date());
+		contact1.setFirstName("Lucian1");
+		contact1.setLastName("Plopeanu1");
+		contact1.setNickname("Cole1");
+		contact1.setPhonenumber1(0741);
+		contact1.setPhonenumber2(0741);
+		contact1.setOtherStuff(other1);
 
-//        testAgenda.listAll();
+		contact2.setdateCreated(new Date());
+		contact2.setFirstName("Lucian2");
+		contact2.setLastName("Plopeanu2");
+		contact2.setNickname("Cole2");
+		contact2.setPhonenumber1(0742);
+		contact2.setPhonenumber2(0742);
+		contact2.setOtherStuff(other2);
+		contact2.setTest("test ");
 
-//        System.out.println(testAgenda.readPerson("18404"));
+		try {
+			 session.beginTransaction();
 
-        String choice;
-
-        while (true) {
-
-            System.out.print("Please insert the type of sort you want to do (cnp / firstName / lastName / age / other = phone number) : ");
-
-            Scanner input = new Scanner(System.in);
-            choice = input.nextLine().toUpperCase();
-
-            if (choice.equals("-")) {
-                System.out.print("The termination key was pressed !");
-                break;
-            }
-
-            testAgenda.sortAll(choice);
-
-
-        }
-    }
+			session.persist(contact1);
+			// session.persist(contact2);
+			Serializable id = session.save((contact2));
+			System.out.println("created id for contact2 : " + id);
+		} catch (Exception ex) {
+			session.getTransaction().rollback();
+		}
+		session.getTransaction().commit();
+		if (session.isOpen()) {
+			session.close();
+		}
+	}
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<h2>Register user form</h2>
+	<h:form id="form">
+		<p:panel id="panel" header="Form" style="width:600px;;">
+			<p:messages id="messages" />
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<p:outputLabel for="firstName" value="First name:" />
+				<p:inputText id="firstName" value="#{registerView.firstName}"
+					required="true" label="Firstname">
+					<f:validateLength minimum="1" />
+				</p:inputText>
+				<p:message for="firstName" />
+
+				<p:outputLabel for="lastName" value="Last name:" />
+				<p:inputText id="lastName" value="#{registerView.lastName}"
+					required="true" label="Surname" />
+				<p:message for="lastName" />
+
+				<p:outputLabel for="password" value="Password:" />
+				<p:inputText id="password" value="#{registerView.password}"
+					required="true" label="Password">
+					<f:validateLength minimum="1" />
+				</p:inputText>
+				<p:message for="password" />
+
+				<p:outputLabel for="username" value="Desidered Username:" />
+				<p:inputText id="username" value="#{registerView.username}"
+					required="true" label="Username">
+					<f:validateLength minimum="1" />
+				</p:inputText>
+				<p:message for="username" />
+
+				<p:outputLabel for="email" value="Email address:" />
+				<p:inputText id="email" required="true" label="email" size="25"
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format !"
+					value="#{registerView.email}">
+
+		<!-- 			<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+ -->				</p:inputText>
+
+				<!-- 				 <p:watermark for="email" value="Email Address *" /> -->
+				<p:message for="email" />
+
+
+
+				<p:commandButton value="Submit" update="panel"
+					actionListener="#{registerView.save}" ajax="false"
+					style="margin-right:20px;" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
