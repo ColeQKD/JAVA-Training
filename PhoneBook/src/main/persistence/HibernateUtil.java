@@ -22,7 +22,7 @@ public class HibernateUtil {
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             System.out.println("Hibernate serviceRegistry created");
              
-            SessionFactory sessionFactory = configuration
+            sessionFactory = configuration
                                 .buildSessionFactory(serviceRegistry);
         	}
             return sessionFactory;
